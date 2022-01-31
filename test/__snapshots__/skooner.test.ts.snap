@@ -1,0 +1,416 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic chart 1`] = `
+Array [
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "env": Array [],
+              "image": "ghcr.io/skooner-k8s/skooner:stable",
+              "livenessProbe": Object {
+                "httpGet": Object {
+                  "path": "/",
+                  "port": 4654,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 30,
+                "timeoutSeconds": 30,
+              },
+              "name": "skooner",
+              "ports": Array [
+                Object {
+                  "containerPort": 4654,
+                },
+              ],
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 80,
+          "targetPort": 4654,
+        },
+      ],
+      "selector": Object {
+        "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+      },
+      "type": "ClusterIP",
+    },
+  },
+]
+`;
+
+exports[`Chart with Ingress and OIDC 1`] = `
+Array [
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "env": Array [
+                Object {
+                  "name": "OIDC_URL",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "url",
+                      "name": "testSecret",
+                    },
+                  },
+                },
+                Object {
+                  "name": "OIDC_CLIENT_ID",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "id",
+                      "name": "testSecret",
+                    },
+                  },
+                },
+                Object {
+                  "name": "OIDC_SECRET",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "secret",
+                      "name": "testSecret",
+                    },
+                  },
+                },
+              ],
+              "image": "ghcr.io/skooner-k8s/skooner:stable",
+              "livenessProbe": Object {
+                "httpGet": Object {
+                  "path": "/",
+                  "port": 4654,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 30,
+                "timeoutSeconds": 30,
+              },
+              "name": "skooner",
+              "ports": Array [
+                Object {
+                  "containerPort": 4654,
+                },
+              ],
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 80,
+          "targetPort": 4654,
+        },
+      ],
+      "selector": Object {
+        "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  Object {
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "Ingress",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "rules": Array [
+        Object {
+          "host": "test.test.com",
+          "http": Object {
+            "paths": Array [
+              Object {
+                "backend": Object {
+                  "service": Object {
+                    "name": "skooner",
+                    "port": Object {
+                      "number": 80,
+                    },
+                  },
+                },
+                "path": "/",
+                "pathType": "Prefix",
+              },
+            ],
+          },
+        },
+      ],
+    },
+  },
+]
+`;
+
+exports[`Chart with Port, OIDC and labels 1`] = `
+Array [
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+          "testKey": "testValue",
+          "testKey2": "testValue2",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+            "testKey": "testValue",
+            "testKey2": "testValue2",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "env": Array [
+                Object {
+                  "name": "OIDC_URL",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "url",
+                      "name": "skooner",
+                    },
+                  },
+                },
+                Object {
+                  "name": "OIDC_CLIENT_ID",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "id",
+                      "name": "skooner",
+                    },
+                  },
+                },
+                Object {
+                  "name": "OIDC_SECRET",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "secret",
+                      "name": "skooner",
+                    },
+                  },
+                },
+              ],
+              "image": "ghcr.io/skooner-k8s/skooner:stable",
+              "livenessProbe": Object {
+                "httpGet": Object {
+                  "path": "/",
+                  "port": 4654,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 30,
+                "timeoutSeconds": 30,
+              },
+              "name": "skooner",
+              "ports": Array [
+                Object {
+                  "containerPort": 4654,
+                },
+              ],
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 8080,
+          "targetPort": 4654,
+        },
+      ],
+      "selector": Object {
+        "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+        "testKey": "testValue",
+        "testKey2": "testValue2",
+      },
+      "type": "NodePort",
+    },
+  },
+]
+`;
+
+exports[`Chart with service account 1`] = `
+Array [
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "env": Array [],
+              "image": "ghcr.io/skooner-k8s/skooner:stable",
+              "livenessProbe": Object {
+                "httpGet": Object {
+                  "path": "/",
+                  "port": 4654,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 30,
+                "timeoutSeconds": 30,
+              },
+              "name": "skooner",
+              "ports": Array [
+                Object {
+                  "containerPort": 4654,
+                },
+              ],
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "name": "skooner",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 80,
+          "targetPort": 4654,
+        },
+      ],
+      "selector": Object {
+        "app": "c87b59782de50bf06e26404355ddbc9d0c872d607a",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "name": "skooner-sa",
+    },
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "name": "skooner-sa",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cluster-admin",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "skooner-sa",
+        "namespace": "default",
+      },
+    ],
+  },
+]
+`;
