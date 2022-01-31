@@ -57,7 +57,7 @@ Create the necessary OIDC environment variables and set it up to use an ingress
   });
 ```
 
-Setup access to the application on port 8080 using a node port. Setup the necessary environment variables to
+Setup access to the application on port 8080 using a node port. Set up the necessary environment variables to
 use OIDC. Finally, setup some additional labels.
 ```typescript
   new Skooner(chart, 'test', {
